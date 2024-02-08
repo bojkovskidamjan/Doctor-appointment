@@ -124,6 +124,7 @@
       <path value="$PROJECT_DIR$/doctor-app/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/doctor-app/vendor/guzzlehttp/uri-template" />
       <path value="$PROJECT_DIR$/doctor-app/vendor/composer" />
+      <path value="$PROJECT_DIR$/doctor-app/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
