@@ -40,4 +40,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function role(){
+        return $this->hasOne('App\Models\Role','id','role_id');
+    }
 }

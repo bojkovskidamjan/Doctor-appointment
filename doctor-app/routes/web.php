@@ -34,7 +34,7 @@ Auth::routes();
 Route::group(['prefix' => 'doctors'], function () {
     Route::get('/', [DoctorController::class, 'index']); //site users                OK
     Route::get('/show/{id?}', [DoctorController::class, 'show']);
-    Route::get('/edit/{id?}', [DoctorController::class, 'show']);
+    Route::get('/edit/{id}', [DoctorController::class, 'edit']);
     Route::post('/store', [DoctorController::class, 'store'])->name('doctor.store');
     Route::get('/create', [DoctorController::class, 'create']);
     Route::post('/delete/{id}', [DoctorController::class, 'destroy']);

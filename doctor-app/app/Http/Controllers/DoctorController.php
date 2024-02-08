@@ -12,7 +12,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors = User::all();
+        $users = User::all();
+        return view('admin.doctor.index', compact('users'));
     }
 
     /**
@@ -59,7 +60,8 @@ class DoctorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.doctor.edit', compact('user'));
     }
 
     /**
@@ -67,23 +69,63 @@ class DoctorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validateUpdate($request, $id);
+        $data = $request->all();
+        $user = User::find($id);
+        $imageName = $user->image;
+        $userPassword = $user->password;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = $image->hashName();
+            $destination = public_path('/images');
+            $image->move($destination, $imageName);
+        }
+        $data['image'] = $imageName;
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        } else {
+            $data['password'] = $userPassword;
+        }
+
+        $user->update($data);
+        return redirect()->route('doctor.index')->with('message', 'Doctor successfully updated.');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public
+    function destroy(string $id)
     {
         //
     }
 
-    public function validateStore($request)
+    public
+    function validateStore($request)
     {
         return $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required|min:6|max:25',
+            'gender' => 'required',
+            'education' => 'required',
+            'address' => 'required',
+            'department' => 'required',
+            'phone_number' => 'required|numeric',
+            'image' => 'required|mimes:jpeg,jpg,png',
+            'role_id' => 'required',
+            'description' => 'required'
+
+        ]);
+    }
+
+    public
+    function validateUpdate($request, $id)
+    {
+        return $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users,email,' . $id,
             'gender' => 'required',
             'education' => 'required',
             'address' => 'required',
