@@ -57,6 +57,14 @@
                         </tr>
                         </thead>
                         <tbody>
+
+                        <button type="button" class="btn btn-outline-success">
+                            <div class="">
+
+                                <a href="/doctors/create"><i class="ik ik-edit"></i><span>ADD NEW USER</span></a>
+                            </div>
+                        </button>
+
                         @if($users)
                             @foreach($users as $user)
                                 <tr>
@@ -82,7 +90,6 @@
                                             <a href="{{ route('doctors.show', [$user->id]) }}">
                                                 <i class="ik ik-trash-2"></i>
                                             </a>
-
 
 
                                         </div>

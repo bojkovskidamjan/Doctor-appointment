@@ -160,67 +160,79 @@
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Image</label>
-                                    <input type="file"
-                                           class="form-control file-upload-info @error('image') is-invalid @enderror"
-                                           placeholder="Upload Image" name="image">
-                                    <span class="input-group-append">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <input type="file"
+                                               class="form-control file-upload-info @error('image') is-invalid @enderror"
+                                               placeholder="Upload Image" name="image">
+                                        <span class="input-group-append">
 
                         </span>
-                                    @error('image')
-                                    <span class="invalid-feedback" role="alert">
+                                        @error('image')
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Role</label>
+                                    <select name="role_id" class="form-control @error('role_id') is-invalid @enderror">
+                                        <option value="">Please select role</option>
+                                        @foreach(App\Models\Role::where('name','!=','patient')->get() as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('role_id')
+                                    <span class="invalid-feedback" role="alert">
+                             <strong>{{ $message }}</strong>
+                                </span>
                                     @enderror
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-md-6">
-                                <label>Role</label>
-                                <select name="role_id" class="form-control @error('role_id') is-invalid @enderror">
-                                    <option value="">Please select role</option>
-                                    @foreach(App\Models\Role::where('name','!=','patient')->get() as $role)
-                                        <option value="{{$role->id}}">{{$role->name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('role_id')
-                                <span class="invalid-feedback" role="alert">
-                             <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                        {{--                                    @foreach(App\Models\Role::get() as $role)--}}
+                        {{--                                        <option value="{{$role->id}}">{{$role->name}}</option>--}}
+                        {{--                                    @endforeach--}}
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleTextarea1">About</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror"
+                                              id="exampleTextarea1" rows="4"
+                                              name="description">{{old('description')}}</textarea>
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                         </span>
+                                    @enderror
+                                </div>
                             </div>
+                        </div>
 
 
-                            {{--                                    @foreach(App\Models\Role::get() as $role)--}}
-                            {{--                                        <option value="{{$role->id}}">{{$role->name}}</option>--}}
-                            {{--                                    @endforeach--}}
-
-
-                            <div class="form-group">
-                                <label for="exampleTextarea1">About</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror"
-                                          id="exampleTextarea1" rows="4" name="description">
-                {{old('description')}}
-
-                </textarea>
-                                @error('description')
-                                <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                                @enderror
-                            </div>
+                        <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                            <button class="btn btn-light">Cancel</button>
+
+                            <a href="/doctors" class="btn btn-dark">Cancel</a>
+                        </div>
+
+                        @if(session('message'))
+                            <div class="alert alert-success">
+                                {{ session('message') }}
+                            </div>
+                        @endif
 
 
                     </form>
+
                 </div>
             </div>
-        </div>
-    </div>
 
 @endsection
