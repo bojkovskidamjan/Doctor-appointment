@@ -32,11 +32,13 @@ Auth::routes();
 //Route::resource('doctor', 'DoctorController');
 
 Route::group(['prefix' => 'doctors'], function () {
-    Route::get('/', [DoctorController::class, 'index']); //site users                OK
-    Route::get('/show/{id?}', [DoctorController::class, 'show']);
-    Route::get('/edit/{id}', [DoctorController::class, 'edit']);
+    Route::get('/', [DoctorController::class, 'index'])->name('doctors.index');
+    Route::get('/show/{id}', [DoctorController::class, 'show'])->name('doctors.show');
+    Route::get('/edit/{id}', [DoctorController::class, 'edit'])->name('doctors.edit');
+    Route::post('/update/{id}', [DoctorController::class, 'update'])->name('doctors.update');
+
     Route::post('/store', [DoctorController::class, 'store'])->name('doctor.store');
     Route::get('/create', [DoctorController::class, 'create']);
-    Route::post('/delete/{id}', [DoctorController::class, 'destroy']);
+    Route::delete('/delete/{id}', [DoctorController::class, 'destroy'])->name('doctors.destroy');
 });
 

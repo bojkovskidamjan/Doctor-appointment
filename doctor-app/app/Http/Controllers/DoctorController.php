@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -32,11 +33,8 @@ class DoctorController extends Controller
 
         $this->ValidateStore($request);
         $data = $request->all();
+        $name = (new User)->userAvatar($request);
 
-        $image = $request->file('image');
-        $name = $image->hashName();
-        $destination = public_path('/images');
-        $image->move($destination, $name);
 
         $data['image'] = $name;
         $data['password'] = bcrypt($request->password);
@@ -52,7 +50,9 @@ class DoctorController extends Controller
      */
     public function show(string $id)
     {
-        return 'showwww';
+        $user = User::find($id);
+
+        return view('admin.doctor.delete', compact('user'));
     }
 
     /**
@@ -75,10 +75,8 @@ class DoctorController extends Controller
         $imageName = $user->image;
         $userPassword = $user->password;
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $name = $image->hashName();
-            $destination = public_path('/images');
-            $image->move($destination, $imageName);
+            $imageName = (new User)->userAvatar($request);
+
         }
         $data['image'] = $imageName;
         if ($request->password) {
@@ -88,18 +86,46 @@ class DoctorController extends Controller
         }
 
         $user->update($data);
-        return redirect()->route('doctor.index')->with('message', 'Doctor successfully updated.');
+        // return redirect()->route('doctor.index')->with('message', 'Doctor successfully updated.');
+        return redirect('/doctors')->with('flash_message', 'Doctor successfully updated.!');
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public
-    function destroy(string $id)
+
+    public function destroy($id)
     {
-        //
+//        auth()->user()->id == $id
+        $user = User::find($id);
+        if (!$user) {
+            abort(401);
+        }
+        $userDelete = $user->delete();
+        if ($userDelete) {
+            unlink(public_path('images/' . $user->image));
+        }
+        return redirect()->route('doctors.index')->with('message', 'Doctor deleted successfully');
+
     }
+
+
+//    public function destroy($id)
+//    {
+//        $user = User::find($id);
+//
+//        if ($user) {
+//            $user->delete();
+//
+//            return redirect()->route('/doctors')->with('message', 'Doctor deleted successfully');
+//        }
+//    }
+//        } else {
+//            return abort(401);
+//        }
+//    }
+
 
     public
     function validateStore($request)
