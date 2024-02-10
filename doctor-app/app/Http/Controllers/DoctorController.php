@@ -13,7 +13,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        //3 vo slucajov e patient
+        $users = User::where('role_id', '!=', 3)->get();
         return view('admin.doctor.index', compact('users'));
     }
 
@@ -40,7 +41,9 @@ class DoctorController extends Controller
         $data['password'] = bcrypt($request->password);
         User::create($data);
 
-        return redirect()->back()->with('message', 'Doctor successfully added.');
+//        return redirect()->back()->with('message', 'Doctor successfully added.');
+        // return view('admin.doctor.index');
+        return redirect()->route('doctors.index')->with('message', 'Doctor added successfully!');
 
 
     }
