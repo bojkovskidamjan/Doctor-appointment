@@ -1,12 +1,12 @@
 <div class="page-wrap">
     <div class="app-sidebar colored">
         <div class="sidebar-header">
-            <a class="header-brand" href="index.html">
+            <a class="header-brand" href="/">
                 <div class="logo-img">
-                    <img src="{{asset('template/src/img/brand-white.svg')}}" class="header-brand-img"
+                    <img src="{{asset('template/src/img/doctor.svg')}}" class="header-brand-img"
                          alt="lavalite">
                 </div>
-                <span class="text">Expense app</span>
+                <span class="text">Doctor app</span>
             </a>
             <button type="button" class="nav-toggle"><i data-toggle="expanded"
                                                         class="ik ik-toggle-right toggle-icon"></i></button>
@@ -18,7 +18,7 @@
                 <nav id="main-menu-navigation" class="navigation-main">
 
                     <div class="nav-item active">
-                        <a href="dashboard"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
+                        <a href="/"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
 
 
                     </div>

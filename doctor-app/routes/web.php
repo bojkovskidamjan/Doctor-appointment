@@ -16,29 +16,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//});
 
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::get('/doctor', [DoctorController::class,'create']);
 
-//Route::resource('doctor', 'DoctorController');
+Route::group(['middleware' => ['auth', 'admin']], function () {
 
-Route::group(['prefix' => 'doctors'], function () {
-    Route::get('/', [DoctorController::class, 'index'])->name('doctors.index');
-    Route::get('/show/{id}', [DoctorController::class, 'show'])->name('doctors.show');
-    Route::get('/edit/{id}', [DoctorController::class, 'edit'])->name('doctors.edit');
-    Route::post('/update/{id}', [DoctorController::class, 'update'])->name('doctors.update');
+    Route::group(['prefix' => 'doctors'], function () {
+        Route::get('/', [DoctorController::class, 'index'])->name('doctors.index');
+        Route::get('/show/{id}', [DoctorController::class, 'show'])->name('doctors.show');
+        Route::get('/edit/{id}', [DoctorController::class, 'edit'])->name('doctors.edit');
+        Route::post('/update/{id}', [DoctorController::class, 'update'])->name('doctors.update');
 
-    Route::post('/store', [DoctorController::class, 'store'])->name('doctor.store');
-    Route::get('/create', [DoctorController::class, 'create']);
-    Route::delete('/delete/{id}', [DoctorController::class, 'destroy'])->name('doctors.destroy');
+        Route::post('/store', [DoctorController::class, 'store'])->name('doctor.store');
+        Route::get('/create', [DoctorController::class, 'create']);
+        Route::delete('/delete/{id}', [DoctorController::class, 'destroy'])->name('doctors.destroy');
+    });
+
 });
 
