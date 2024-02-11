@@ -13,6 +13,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
+
+       // dd(\Illuminate\Auth\user()->role->name);
         //3 vo slucajov e patient
         $users = User::where('role_id', '!=', 3)->get();
         return view('admin.doctor.index', compact('users'));

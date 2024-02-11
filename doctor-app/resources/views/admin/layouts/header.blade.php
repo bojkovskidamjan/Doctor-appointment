@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ThemeKit - Admin Template</title>
+        <title>Doctor Admin template</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
-        
-        
+
+
         <link rel="stylesheet" href="{{asset('template/plugins/bootstrap/dist/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('template/plugins/fontawesome-free/css/all.min.css')}}">
         <link rel="stylesheet" href="{{asset('template/plugins/icon-kit/dist/css/iconkit.min.css')}}">
@@ -57,10 +57,10 @@
                                     <div class="notifications-wrap">
                                         <a href="#" class="media">
                                             <span class="d-flex">
-                                                <i class="ik ik-check"></i> 
+                                                <i class="ik ik-check"></i>
                                             </span>
                                             <span class="media-body">
-                                                <span class="heading-font-family media-heading">Invitation accepted</span> 
+                                                <span class="heading-font-family media-heading">Invitation accepted</span>
                                                 <span class="media-content">Your have been Invited ...</span>
                                             </span>
                                         </a>
@@ -69,16 +69,16 @@
                                                 <img src="{{asset('template/img/users/1.jpg')}}" class="rounded-circle" alt="">
                                             </span>
                                             <span class="media-body">
-                                                <span class="heading-font-family media-heading">Steve Smith</span> 
+                                                <span class="heading-font-family media-heading">Steve Smith</span>
                                                 <span class="media-content">I slowly updated projects</span>
                                             </span>
                                         </a>
                                         <a href="#" class="media">
                                             <span class="d-flex">
-                                                <i class="ik ik-calendar"></i> 
+                                                <i class="ik ik-calendar"></i>
                                             </span>
                                             <span class="media-body">
-                                                <span class="heading-font-family media-heading">To Do</span> 
+                                                <span class="heading-font-family media-heading">To Do</span>
                                                 <span class="media-content">Meeting with Nathan on Friday 8 AM ...</span>
                                             </span>
                                         </a>
@@ -105,25 +105,45 @@
                                 </div>
                             </div>
                             <button type="button" class="nav-link ml-10" id="apps_modal_btn" data-toggle="modal" data-target="#appsModal"><i class="ik ik-grid"></i></button>
+{{--                            <div class="dropdown">--}}
+{{--                                <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                    <strong>{{strtoupper(Auth()->user()->name)}}</strong>--}}
+
+{{--                                </a>--}}
+{{--                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">--}}
+
+
+{{--                                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
+{{--                                       onclick="event.preventDefault();--}}
+{{--                                                     document.getElementById('logout-form').submit();">--}}
+{{--                                  <i class="ik ik-power dropdown-icon"></i>      {{ __('Logout') }}--}}
+{{--                                    </a>--}}
+
+{{--                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+{{--                                        @csrf--}}
+{{--                                    </form>--}}
+
+
+
+{{--                                </div>--}}
+{{--                            </div>--}}
+
                             <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <strong>{{strtoupper(Auth()->user()->name)}}</strong>
-
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                    
-                                    
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                  <i class="ik ik-power dropdown-icon"></i>      {{ __('Logout') }}
+                                @auth
+                                    <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <strong>{{ strtoupper(Auth()->user()->name) }}</strong>
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="ik ik-power dropdown-icon"></i> {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                @endauth
                             </div>
+
 
                         </div>
                     </div>
