@@ -37,15 +37,19 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::post('/update/{id}', [DoctorController::class, 'update'])->name('doctors.update');
 
         Route::post('/store', [DoctorController::class, 'store'])->name('doctor.store');
-        Route::get('/create', [DoctorController::class, 'create']);
+        Route::get('/create', [DoctorController::class, 'create'])->name('doctors.create');
         Route::delete('/delete/{id}', [DoctorController::class, 'destroy'])->name('doctors.destroy');
     });
 
 });
-Route::group(['prefix' => 'appointment'], function () {
-    Route::get('/', [AppointmentController::class, 'index'])->name('appointment.index');
-    Route::get('/create', [AppointmentController::class,'create']);
-    Route::post('/store', [AppointmentController::class,'store'])->name('appointment.store');
-    Route::post('/check', 'App\Http\Controllers\AppointmentController@check')->name('appointment.check');
-    Route::post('/update', 'App\Http\Controllers\AppointmentController@updateTime')->name('update');
-});
+Route::group(['middleware' => ['auth', 'doctor']], function (){
+
+    Route::group(['prefix' => 'appointment'], function () {
+        Route::get('/', [AppointmentController::class, 'index'])->name('appointment.index');
+        Route::get('/create', [AppointmentController::class,'create'])->name('appointment.create');
+        Route::post('/store', [AppointmentController::class,'store'])->name('appointment.store');
+        Route::post('/check', 'App\Http\Controllers\AppointmentController@check')->name('appointment.check');
+        Route::post('/update', 'App\Http\Controllers\AppointmentController@updateTime')->name('update');
+    });
+
+ });

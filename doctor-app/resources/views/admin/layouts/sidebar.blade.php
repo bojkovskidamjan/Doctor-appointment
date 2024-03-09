@@ -26,21 +26,25 @@
 
                     <div class="nav-lavel">MODELS</div>
 
-                     <div class="nav-item has-sub">
-                        <a href="#"><i class="ik ik-pie-chart"></i><span>Doctors</span> </a>
+                    <div class="nav-item has-sub">
+                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Doctor</span>
+                            <span class="badge badge-danger"></span></a>
                         <div class="submenu-content">
-                            <a href="/doctors" class="menu-item active">All Doctors</a>
-                            <a href="/doctors/create" class="menu-item">Create</a>
-                            <a href="#" class="menu-item">View</a>
+                            <a href="{{route('doctors.index')}}" class="menu-item">View all doctors</a>
+                            <a href="{{route('doctors.create')}}" class="menu-item">Create</a>
+
+                        </div>
+                    </div>
+                    <div class="nav-item has-sub">
+                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Appointment Time</span>
+                            <span class="badge badge-danger"></span></a>
+                        <div class="submenu-content">
+                            <a href="{{route('appointment.create')}}" class="menu-item">Create</a>
+                            <a href="{{route('appointment.index')}}" class="menu-item">Check</a>
                         </div>
                     </div>
 
 
-
-                    <div class="nav-item  ">
-                        <a href="#"><i class="ik ik-box"></i><span>Reports</span></a>
-
-                    </div>
                     {{--
                                         <div class="nav-item  ">
                                             <a href="#"><i class="ik ik-gitlab"></i><span>Advance</span> <span
