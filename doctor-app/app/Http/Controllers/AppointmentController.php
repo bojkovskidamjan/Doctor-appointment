@@ -89,8 +89,23 @@ class AppointmentController extends Controller
                 ->with('message', 'Appointment time not available for this date.');
         }
         $appointmentId = $appointment->id;
-        $times = Time::where('appointment_id',$appointmentId)->get();
+        $times = Time::where('appointment_id', $appointmentId)->get();
 
-        return view('admin.appointment.index', compact('times','appointmentId','date'));
+        return view('admin.appointment.index', compact('times', 'appointmentId', 'date'));
+    }
+
+    public function updateTime(Request $request)
+    {
+        $appointmentId = $request->appointmentId;
+        $appointment = Time::where('appointment_id', $appointmentId)->delete();
+
+        foreach ($request->time as $time) {
+            Time::create([
+                'appointment_id' => $appointmentId,
+                'time' => $time,
+                'status' => 0
+            ]);
+        }
+        return redirect()->route('appointment.index')->with('message', 'Appointment time updated!!');
     }
 }
