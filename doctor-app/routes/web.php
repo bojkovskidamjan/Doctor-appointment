@@ -44,4 +44,5 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 Route::group(['prefix' => 'appointment'], function () {
     Route::get('/create', [AppointmentController::class,'create']);
+    Route::post('/store', [AppointmentController::class,'store'])->name('appointment.store');
 });
