@@ -9,33 +9,44 @@
             <div class="col-md-6">
                 <h2>Create an account & Book your appointment</h2>
                 <p>
-                    Welcome to our healthcare platform, where patients can effortlessly schedule their next doctor's appointment with just a few clicks, eliminating the hassle of long wait times and phone calls. Our intuitive interface allows doctors to efficiently manage appointments, reach new patients, and communicate securely, all in one convenient location. Say goodbye to administrative headaches and hello to streamlined practice management. Join us today and experience a seamless healthcare connection for both patients and doctors alike.
+                    Welcome to our healthcare platform, where patients can effortlessly schedule their next doctor's
+                    appointment with just a few clicks, eliminating the hassle of long wait times and phone calls. Our
+                    intuitive interface allows doctors to efficiently manage appointments, reach new patients, and
+                    communicate securely, all in one convenient location. Say goodbye to administrative headaches and
+                    hello to streamlined practice management. Join us today and experience a seamless healthcare
+                    connection for both patients and doctors alike.
                 </p>
                 <div class="mt-5">
-                    <a href="{{url('/register')}}"><button class="btn btn-success">Register as Patient</button></a>
-                    <a href="{{url('/login')}}"><button class="btn btn-secondary mx-2">Login</button></a>
+                    <a href="{{url('/register')}}">
+                        <button class="btn btn-success">Register as Patient</button>
+                    </a>
+                    <a href="{{url('/login')}}">
+                        <button class="btn btn-secondary mx-2">Login</button>
+                    </a>
                 </div>
             </div>
         </div>
-<hr>
+        <hr>
         <!--Search doctors-->
-        <div class="card">
-            <div class="card-body">
-                <div class="card-header">
-                    Find Doctors
-                </div>
+        <form action="{{url('/')}}" method="get">
+            <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <input type="text" name="date" class="form-control" id="datepicker">
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-primary" type="submit">Find Doctors</button>
+                    <div class="card-header">
+                        Find Doctors
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" name="date" class="form-control" id="datepicker">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" type="submit">Find Doctors</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
         <!--display doctors-->
         <div class="card">
             <div class="card-body">
@@ -56,7 +67,8 @@
                             <tr>
                                 <th scope="row">1</th>
                                 <td>
-                                    <img src="{{asset('images')}}/{{$doctor->doctor->image}}" width="100px" style="border-radius: 50%">
+                                    <img src="{{asset('images')}}/{{$doctor->doctor->image}}" width="100px"
+                                         style="border-radius: 50%">
                                 </td>
                                 <td>{{$doctor->doctor->name}}</td>
                                 <td>{{$doctor->doctor->department}}</td>
