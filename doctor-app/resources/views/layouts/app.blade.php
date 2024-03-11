@@ -90,13 +90,44 @@
     </main>
 </div>
 <script>
+    var dateToday = new Date();
     $(function () {
-        $("#datepicker").datepicker({dateFormat: "yy-mm-dd"}).val();
+        $("#datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            showButtonPanel: true,
+            // numberOfMonths: 2,
+            minDate: dateToday
+        });
     });
 </script>
 <style type="text/css">
+    body {
+        background: #fff;
+    }
+
     .ui-corner-all {
         background: steelblue;
+        color: #fff;
+    }
+
+    label.btn {
+        padding: 0;
+    }
+
+    label.btn input {
+        opacity: 0;
+        position: absolute;
+    }
+
+    label.btn span {
+        text-align: center;
+        padding: 6px 12px;
+        display: block;
+        min-width: 80px;
+    }
+
+    label.btn input:checked + span {
+        background-color: rgb(80, 110, 228);
         color: #fff;
     }
 </style>
