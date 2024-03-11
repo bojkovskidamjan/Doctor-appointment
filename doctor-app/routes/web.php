@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,10 +17,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
