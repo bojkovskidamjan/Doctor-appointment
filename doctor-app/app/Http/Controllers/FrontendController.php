@@ -94,3 +94,5 @@ class FrontendController extends Controller
         return view('booking.index', compact('appointments'));
     }
 }
+
+

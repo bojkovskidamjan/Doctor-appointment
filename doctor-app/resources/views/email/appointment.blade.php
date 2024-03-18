@@ -8,3 +8,4 @@ Dear {{ $mailData['name'] }},
 Location: Rugjer Boskovikj, Macedonia, 1000 Skopje
 <br>
 Contact: 389 2577-123
+
