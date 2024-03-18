@@ -25,6 +25,11 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/new-appointment/{doctorId}/{date}', [FrontendController::class, 'show'])->name('create.appointment');
 
+Route::post('/book/appointment', [FrontendController::class, 'store'])->name('booking.appointment')->middleware('auth');
+
+Route::get('/my-booking', [FrontendController::class, 'myBookings'])->name('my.booking')->middleware('auth');
+
+
 Auth::routes();
 
 
@@ -52,4 +57,4 @@ Route::group(['middleware' => ['auth', 'doctor']], function (){
         Route::post('/update', 'App\Http\Controllers\AppointmentController@updateTime')->name('update');
     });
 
- });
+});
