@@ -58,3 +58,4 @@ Route::group(['middleware' => ['auth', 'doctor']], function (){
     });
 
 });
+
