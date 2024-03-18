@@ -39,7 +39,7 @@
                             <div class="row">
                                 @foreach($times as $time)
                                     <div class="col md-3">
-                                        <label class="btn btn-outline-primary">
+                                        <label class="btn btn-outline-primary btn-block">
                                             <input type="radio" name="time" value="{{$time->time}}">
                                             <span>{{$time->time}}</span>
                                         </label>

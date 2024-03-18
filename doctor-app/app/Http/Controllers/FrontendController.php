@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AppointmentMail;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
@@ -60,6 +61,21 @@ class FrontendController extends Controller
         Time::where('appointment_id',$request->appointmentId)
             ->where('time',$request->time)
             ->update(['status'=>1]);
+
+        //send email notification
+        $doctorName = User::where('id',$request->doctorId)->first();
+        $mailData = [
+            'name'=> auth()->user()->name,
+            'time'=>$request->time,
+            'date'=>$request->date,
+            'doctorName'=> $doctorName->name
+        ];
+        try {
+            \Mail::to(auth()->user()->email)->send(new AppointmentMail($mailData));
+        }catch (\Exception $e){
+
+        }
+
         return redirect()->back()->with('message','Your appointment was booked');
 
     }
@@ -72,4 +88,9 @@ class FrontendController extends Controller
             ->exists();
     }
 
+    public function myBookings()
+    {
+        $appointments = Booking::latest()->where('user_id', auth()->user()->id)->get();
+        return view('booking.index', compact('appointments'));
+    }
 }
