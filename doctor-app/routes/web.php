@@ -27,6 +27,9 @@ Route::get('/new-appointment/{doctorId}/{date}', [FrontendController::class, 'sh
 
 Route::post('/book/appointment', [FrontendController::class, 'store'])->name('booking.appointment')->middleware('auth');
 
+Route::get('/my-booking', [FrontendController::class, 'myBookings'])->name('my.booking')->middleware('auth');
+
+
 Auth::routes();
 
 
