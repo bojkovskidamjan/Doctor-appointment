@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +26,13 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/new-appointment/{doctorId}/{date}', [FrontendController::class, 'show'])->name('create.appointment');
 
-Route::post('/book/appointment', [FrontendController::class, 'store'])->name('booking.appointment')->middleware('auth');
-
-Route::get('/my-booking', [FrontendController::class, 'myBookings'])->name('my.booking')->middleware('auth');
-
+Route::group(['middleware' => ['auth', 'patient']], function () {
+    Route::post('/book/appointment', [FrontendController::class, 'store'])->name('booking.appointment');
+    Route::get('/my-booking', [FrontendController::class, 'myBookings'])->name('my.booking');
+    Route::get('/user-profile', [ProfileController::class, 'index'])->name('profile');;
+    Route::post('/user-profile', [ProfileController::class, 'store'])->name('profile.store');
+    Route::post('/profile-pic', [ProfileController::class, 'profilePic'])->name('profile.pic');
+});
 
 Auth::routes();
 
