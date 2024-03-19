@@ -47,10 +47,12 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
-                    @if (auth()->check() && auth()->user()->role->name === 'patient')
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('my.booking') }}">{{ __('My Bookings') }}</a>
-                        </li>
+                    @if (auth() -> check() && auth()->check() && auth()->user()->role->name === 'patient')
+                            <li class="nav">
+                                <a class="nav-link" href="{{ route('my.booking') }}">{{ __('My Bookings') }}</a>
+                            </li>
+
+
                     @endif
                     <!-- Authentication Links -->
                     @guest
@@ -73,6 +75,9 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('profile') }}">
+                                    {{ __('Profile') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
