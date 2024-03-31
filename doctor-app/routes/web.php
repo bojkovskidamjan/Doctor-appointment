@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientListController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,7 +50,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/create', [DoctorController::class, 'create'])->name('doctors.create');
         Route::delete('/delete/{id}', [DoctorController::class, 'destroy'])->name('doctors.destroy');
     });
-
+    Route::get('/patients', [PatientListController::class, 'index'])->name('patients.index');
+    Route::get('/patients/all', [PatientListController::class, 'allTimeAppointments'])->name('patients.all.appointments');
+    Route::get('/status/update/{id}', [PatientListController::class, 'toggleStatus'])->name('patients.update.status');
 });
 Route::group(['middleware' => ['auth', 'doctor']], function (){
 
