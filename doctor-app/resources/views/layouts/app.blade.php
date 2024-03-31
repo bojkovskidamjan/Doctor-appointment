@@ -47,11 +47,10 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
-                    @if (auth() -> check() && auth()->check() && auth()->user()->role->name === 'patient')
-                            <li class="nav">
-                                <a class="nav-link" href="{{ route('my.booking') }}">{{ __('My Bookings') }}</a>
-                            </li>
-
+                    @if (auth()->check() && (auth()->user()->role->name === 'admin' || auth()->user()->role->name === 'patient'))
+                        <li class="nav">
+                            <a class="nav-link" href="{{ route('my.booking') }}">{{ __('My Bookings') }}</a>
+                        </li>
 
                     @endif
                     <!-- Authentication Links -->
