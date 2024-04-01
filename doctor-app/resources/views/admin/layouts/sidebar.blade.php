@@ -19,10 +19,7 @@
 
                     <div class="nav-item active">
                         <a href="/"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
-
-
                     </div>
-
 
                     <div class="nav-lavel">MODELS</div>
                     @if (auth()->check() && auth()->user()->role->name === 'admin')
@@ -36,13 +33,23 @@
                             </div>
                         </div>
                     @endif
-                    @if (auth()->check() && (auth()->user()->role->name === 'admin' || auth()->user()->role->name === 'doctor'))
+                    @if (auth()->check() &&  auth()->user()->role->name === 'doctor')
                         <div class="nav-item has-sub">
                             <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Appointment Time</span>
                                 <span class="badge badge-danger"></span></a>
                             <div class="submenu-content">
                                 <a href="{{route('appointment.index')}}" class="menu-item">Check</a>
                                 <a href="{{route('appointment.create')}}" class="menu-item">Create</a>
+                            </div>
+                        </div>
+                    @endif
+                    @if (auth()->check() &&  auth()->user()->role->name === 'doctor')
+                        <div class="nav-item has-sub">
+                            <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Patients</span>
+                                <span class="badge badge-danger"></span></a>
+                            <div class="submenu-content">
+                                <a href="{{route('patients.today')}}" class="menu-item">Today's patients</a>
+                                <a href="{{route('prescribed.patients')}}" class="menu-item">All patients</a>
                             </div>
                         </div>
                     @endif
@@ -57,6 +64,16 @@
                             </div>
                         </div>
                     @endif
+                    <div class="nav-item active">
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="ik ik-power dropdown-icon"></i>
+                            <span>Logout</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </nav>
             </div>
         </div>
