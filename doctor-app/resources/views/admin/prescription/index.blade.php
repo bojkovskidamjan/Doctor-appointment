@@ -51,19 +51,19 @@
                                         where('doctor_id', auth()->user()->id)->
                                         where('user_id', $booking->user_id)->exists())
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#modal{{$booking->user_id}}">
+                                                    data-bs-target="#modal{{ $booking->user_id }}">
                                                 Write prescription
                                             </button>
-                                            @include('admin.prescription.form')
+                                            @include('admin.prescription.modal')
                                         @else
-                                            <a href="{{ route('prescription.show', [$booking->user_id, $booking->date]) }}" class="btn btn-secondary">View prescription</a>
+                                            <a href="{{ route('prescription.show', [$booking->user_id, $booking->date]) }}"
+                                               class="btn btn-secondary">View prescription</a>
                                         @endif
                                     </td>
                                 </tr>
                             @empty
                                 <td>There are no appointments!</td>
                             @endforelse
-
                             </tbody>
                         </table>
                     </div>

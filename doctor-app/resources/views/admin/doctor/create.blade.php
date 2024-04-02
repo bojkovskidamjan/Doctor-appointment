@@ -122,19 +122,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Specialist</label>
+                                    <select name="department" class="form-control">
+                                        <option value="">Please select</option>
 
-                                    <input type="text" name="department"
-                                           class="form-control @error('department') is-invalid @enderror"
-                                           placeholder="doctor department">
-
-                                    {{--                                    <select name="department" class="form-control">--}}
-                                    {{--                                        <option value="">Please select</option>--}}
-
-                                    {{--                                        @foreach(App\Models\Department::all() as $d)--}}
-                                    {{--                                            <option value="{{$d->department}}">{{$d->department}}</option>--}}
-                                    {{--                                        @endforeach--}}
-                                    {{--                                    </select>--}}
-
+                                        @foreach(App\Models\Department::all() as $d)
+                                            <option value="{{ $d->department }}">{{ $d->department }}</option>
+                                        @endforeach
+                                    </select>
 
                                     @error('department')
                                     <span class="invalid-feedback" role="alert">
