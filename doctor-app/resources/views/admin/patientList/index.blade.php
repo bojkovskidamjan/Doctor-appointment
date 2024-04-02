@@ -50,7 +50,6 @@
                             @empty
                                 <td>There are no appointments!</td>
                             @endforelse
-
                             </tbody>
                         </table>
                     </div>

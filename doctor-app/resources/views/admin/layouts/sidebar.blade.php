@@ -20,26 +20,36 @@
                     <div class="nav-item active">
                         <a href="/"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                     </div>
+                    @if (auth()->check() && auth()->user()->role->name === 'admin')
+                        <div class="nav-item has-sub">
+                            <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Department</span>
+                                <span class="badge badge-danger"></span></a>
+                            <div class="submenu-content">
+                                <a href="{{route('department.index')}}" class="menu-item">View all departments</a>
+                                <a href="{{route('department.create')}}" class="menu-item">Create department</a>
 
-                    <div class="nav-lavel">MODELS</div>
+                            </div>
+                        </div>
+                    @endif
                     @if (auth()->check() && auth()->user()->role->name === 'admin')
                         <div class="nav-item has-sub">
                             <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Doctor</span>
                                 <span class="badge badge-danger"></span></a>
                             <div class="submenu-content">
                                 <a href="{{route('doctors.index')}}" class="menu-item">View all doctors</a>
-                                <a href="{{route('doctors.create')}}" class="menu-item">Create</a>
+                                <a href="{{route('doctors.create')}}" class="menu-item">Add doctor</a>
 
                             </div>
                         </div>
                     @endif
                     @if (auth()->check() &&  auth()->user()->role->name === 'doctor')
                         <div class="nav-item has-sub">
-                            <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Appointment Time</span>
+                            <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Appointment Terms</span>
                                 <span class="badge badge-danger"></span></a>
                             <div class="submenu-content">
-                                <a href="{{route('appointment.index')}}" class="menu-item">Check</a>
-                                <a href="{{route('appointment.create')}}" class="menu-item">Create</a>
+                                <a href="{{route('appointment.index')}}" class="menu-item">View all appointment
+                                    terms</a>
+                                <a href="{{route('appointment.create')}}" class="menu-item">Create appointment term</a>
                             </div>
                         </div>
                     @endif
@@ -48,8 +58,8 @@
                             <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Patients</span>
                                 <span class="badge badge-danger"></span></a>
                             <div class="submenu-content">
-                                <a href="{{route('patients.today')}}" class="menu-item">Today's patients</a>
-                                <a href="{{route('prescribed.patients')}}" class="menu-item">All patients</a>
+                                <a href="{{route('patients.today')}}" class="menu-item">View today's patients</a>
+                                <a href="{{route('prescribed.patients')}}" class="menu-item">View all patients</a>
                             </div>
                         </div>
                     @endif
@@ -58,9 +68,9 @@
                             <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Patient Appointments</span>
                                 <span class="badge badge-danger"></span></a>
                             <div class="submenu-content">
-                                <a href="{{route('patients.index')}}" class="menu-item">Today Appointments</a>
-                                <a href="{{route('patients.all.appointments')}}" class="menu-item">All Time
-                                    Appointments</a>
+                                <a href="{{route('patients.index')}}" class="menu-item">View today's Appointments</a>
+                                <a href="{{route('patients.all.appointments')}}" class="menu-item">View all
+                                    appointments</a>
                             </div>
                         </div>
                     @endif

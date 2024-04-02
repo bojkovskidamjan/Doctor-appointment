@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/create', [DoctorController::class, 'create'])->name('doctors.create');
         Route::delete('/delete/{id}', [DoctorController::class, 'destroy'])->name('doctors.destroy');
     });
+    Route::resource('department', 'App\Http\Controllers\DepartmentController');
 });
 
 Route::group(['middleware' => ['auth', 'doctor']], function () {

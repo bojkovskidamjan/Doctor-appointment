@@ -1,5 +1,6 @@
 @if (count($bookings) > 0)
-    <div class="modal fade" id="modal{{$booking->user_id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modal{{$booking->user_id}}" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <form action="{{route('prescription')}}" method="POST">

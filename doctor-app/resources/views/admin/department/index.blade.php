@@ -1,14 +1,15 @@
 @extends('admin.layouts.master')
 
 @section('content')
+
     <div class="page-header">
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <i class="ik ik-inbox bg-blue"></i>
                     <div class="d-inline">
-                        <h5>Doctors</h5>
-                        <span>list of all doctors</span>
+                        <h5>Departments</h5>
+                        <span>list of all departments</span>
                     </div>
                 </div>
             </div>
@@ -19,7 +20,7 @@
                             <a href="../index.html"><i class="ik ik-home"></i></a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">Doctors</a>
+                            <a href="#">Departments</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Index</li>
                     </ol>
@@ -27,6 +28,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="row">
         <div class="col-md-12">
@@ -36,7 +38,7 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header"><h3>Doctor tables</h3>
+                <div class="card-header"><h3>Departments table</h3>
 
                 </div>
                 <div class="card-body">
@@ -44,50 +46,34 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th class="nosort">Avatar</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Phone number</th>
-                            <th>Department</th>
-                            <th>Action</th>
                             <th class="nosort">&nbsp;</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <button type="button" class="btn btn-outline-success">
-                            <div class="">
-                                <a href="/doctors/create"><i class="ik ik-edit"></i><span>ADD NEW DOCTOR</span></a>
-                            </div>
-                        </button>
-                        @if($users)
-                            @foreach($users as $user)
+                        @if(count($departments) > 0)
+                            @foreach($departments as $department)
                                 <tr>
-                                    <td>{{$user->name}}</td>
-                                    <td><img src="{{asset('images')}}/{{$user->image}}" class="table-user-thumb" alt="">
-                                    </td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->address}}</td>
-                                    <td>{{$user->phone_number}}</td>
-                                    <td>{{$user->department}}</td>
+                                    <td>{{ $department->department }}</td>
                                     <td>
                                         <div class="table-actions">
-                                            <a href="#" data-toggle="modal" data-target="#exampleModal{{$user->id}}">
-                                                <i class="ik ik-eye"></i>
+                                            <a href="{{ route('department.edit', [$department->id]) }}">
+                                                <i class="ik ik-edit-2"></i>
                                             </a>
-                                            <a href="/doctors/edit/{{ $user->id }}">
-                                                <i
-                                                    class="ik ik-edit-2"></i></a>
-                                            <a href="{{ route('doctors.show', [$user->id]) }}">
-                                                <i class="ik ik-trash-2"></i>
-                                            </a>
+                                            <form action="{{ route('department.destroy', [$department->id]) }}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit">
+                                                    <i class="ik ik-trash-2"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
-                                @include('admin.doctor.modal')
                             @endforeach
                         @else
-                            <td>No user to display</td>
+                            <td>No departments to display</td>
                         @endif
                         </tbody>
                     </table>
